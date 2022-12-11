@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <style>
+        #map {
+            height: 1000px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="map"></div>
+
+
+
+
+    <script>
+        let stations = [{
+                name: 'Katowice Zawodzie',
+                x: 50.2574804,
+                y: 19.0564042,
+            },
+            {
+                name: 'Sosnowiec Główny',
+                x: 50.2786672535713,
+                y: 19.126592534289635
+            },
+            {
+                name: 'Będzin',
+                x: 50.30890108620403,
+                y: 19.141096048694816
+            },
+            {
+                name: 'Sosnowiec Południowy',
+                x: 50.269550321476046,
+                y: 19.125598915223183
+            },
+            {
+                name: 'Mysłowice',
+                x: 50.23790508562325,
+                y: 19.141623443140155
+            }
+        ]
+
+        var map = L.map('map').setView([50.270908, 19.039993], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        stations.forEach(station => {
+            var marker = L.marker([station.x, station.y], {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5,
+                radius: 500
+
+            }).bindTooltip(station.name, {
+                permanent: true,
+                className: "my-label",
+                offset: [0, 0]
+            }).addTo(map)
+
+
+            // p = new L.Popup({
+            //         autoClose: true,
+            //         closeOnClick: false
+            //     })
+            //     .setContent(station.name)
+            //     .setLatLng([station.x, station.y]);
+            // marker.bindPopup(p);
+
+        });
+    </script>
+</body>
+
+</html>
