@@ -24,7 +24,18 @@
             height: 100vh;
         }
     </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XEMEDP2BGJ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-XEMEDP2BGJ');
+    </script>
 </head>
 
 <body>
@@ -108,12 +119,6 @@
 
             },
             {
-                name: 'Włoszczowa Północ',
-                x: 50.8563928700141,
-                y: 19.946100644374447,
-                type: ''
-            },
-            {
                 name: 'Zawiercie',
                 x: 50.481106770727386,
                 y: 19.42341238900361,
@@ -159,7 +164,7 @@
                 name: 'Dąbrowa Górnicza Ząbkowice',
                 x: 50.367042520527505,
                 y: 19.264479901339488,
-
+                ai: true
             },
 
 
