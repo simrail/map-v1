@@ -250,6 +250,36 @@
             layer: markersLayer
         }));;
 
+        var playableManualIcon = L.icon({
+            iconUrl: '/images/icon-manual.png',
+
+            iconSize: [35, 41], // size of the icon
+            // shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [0, 20], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62], // the same for the shadow
+            // popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
+        });
+
+        var aiIcon = L.icon({
+            iconUrl: '/images/icon-ia.png',
+
+            iconSize: [31, 41], // size of the icon
+            // shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [0, 20], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62], // the same for the shadow
+            // popupAnchor: [0, 41] // point from which the popup should open relative to the iconAnchor 
+        });
+
+        var playableDigitalIcon = L.icon({
+            iconUrl: '/images/icon-digital.png',
+
+            iconSize: [35, 41], // size of the icon
+            // shadowSize: [50, 64], // size of the shadow
+            iconAnchor: [0, 20], // point of the icon which will correspond to marker's location
+            // shadowAnchor: [4, 62], // the same for the shadow
+            // popupAnchor: [10, 50] // point from which the popup should open relative to the iconAnchor
+        });
+
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -264,6 +294,15 @@
 
         stations.forEach(station => {
 
+            if (station.ai) {
+                var icona = aiIcon;
+            } else if (station.type === 'manual') {
+                var icona = playableManualIcon;
+            } else {
+                var icona = playableDigitalIcon;
+
+            }
+
             let stationName = (station.ai ? '[AI] ' : '') + station.name;
 
             var marker = L.marker([station.x, station.y], {
@@ -271,22 +310,17 @@
                 fillColor: '#f03',
                 fillOpacity: 0.5,
                 radius: 500,
-                title: station.name
+                title: station.name,
+                icon: icona
 
             }).bindTooltip(stationName, {
                 permanent: true,
                 className: "my-label",
-                offset: [0, 0]
+                offset: [0, 0],
+                direction: 'left'
             }).addTo(markersLayer);
 
 
-            // p = new L.Popup({
-            //         autoClose: true,
-            //         closeOnClick: false
-            //     })
-            //     .setContent(station.name)
-            //     .setLatLng([station.x, station.y]);
-            // marker.bindPopup(p);
 
         });
 
