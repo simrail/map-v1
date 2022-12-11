@@ -38,36 +38,43 @@
                 name: 'Katowice Zawodzie',
                 x: 50.2574804,
                 y: 19.0564042,
+                type: 'digital'
             },
             {
                 name: 'Sosnowiec Główny',
                 x: 50.2786672535713,
-                y: 19.126592534289635
+                y: 19.126592534289635,
+                type: 'digital'
             },
             {
                 name: 'Będzin',
                 x: 50.30890108620403,
-                y: 19.141096048694816
+                y: 19.141096048694816,
+                type: 'manual'
             },
             {
                 name: 'Sosnowiec Południowy',
                 x: 50.269550321476046,
-                y: 19.125598915223183
+                y: 19.125598915223183,
+                ai: true
             },
             {
                 name: 'Mysłowice',
                 x: 50.23790508562325,
-                y: 19.141623443140155
+                y: 19.141623443140155,
+                ai: true
             },
             {
                 name: 'Włoszczowa Północ',
                 x: 50.85636043203617,
-                y: 19.946270230041435
+                y: 19.946270230041435,
+                type: 'digital'
             },
             {
                 name: 'Żelisławice',
                 x: 50.80337865175368,
-                y: 19.858169169133415
+                y: 19.858169169133415,
+                ai: true
             },
             {
                 name: 'Opoczno Południe',
@@ -79,6 +86,7 @@
                 name: 'Pilichowice',
                 x: 51.25111190155769,
                 y: 20.119311761248742,
+                type: 'digital'
             },
             {
                 name: 'Olszamowice',
@@ -90,6 +98,7 @@
                 name: 'Dąbrowa Górnicza',
                 x: 50.330193771005916,
                 y: 19.185407083980802,
+                ai: true,
             },
             {
                 name: 'Góra Włodowska',
@@ -102,12 +111,59 @@
                 name: 'Włoszczowa Północ',
                 x: 50.8563928700141,
                 y: 19.946100644374447,
+                type: ''
             },
             {
                 name: 'Zawiercie',
                 x: 50.481106770727386,
                 y: 19.42341238900361,
+                ai: true
             },
+            {
+                name: 'Psary',
+                x: 50.73402421148931,
+                y: 19.81524289134878,
+                type: 'digital'
+            },
+            {
+                name: 'Starzyny',
+                x: 50.71272005979818,
+                y: 19.8013961821638,
+                ai: true
+            },
+            {
+                name: 'Knapówka',
+                x: 50.80053714477343,
+                y: 19.904389588290105,
+                type: 'digital'
+            },
+            {
+                name: 'Czarnca',
+                x: 50.823959976470775,
+                y: 19.94521227641923,
+                ai: true
+            },
+            {
+                name: 'Łazy Łc',
+                x: 50.416415304975416,
+                y: 19.361100272290074,
+                type: 'manual'
+            },
+            {
+                name: 'Łazy',
+                x: 50.43012201015637,
+                y: 19.391871759516924,
+                ai: true
+            },
+            {
+                name: 'Dąbrowa Górnicza Ząbkowice',
+                x: 50.367042520527505,
+                y: 19.264479901339488,
+
+            },
+
+
+
 
 
         ]
@@ -115,12 +171,16 @@
 
         var map = L.map('map', {
             fullscreenControl: true,
-
         }).setView([50.270908, 19.039993], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> | <a href = "https://discord.gg/d65Q8gWM5W" > Created by SimRail France 🇫🇷 Community </a>'
         }).addTo(map);
+
+
+
+        var markersLayer = new L.LayerGroup(); //layer contain searched elements
+        map.addLayer(markersLayer);
 
 
         stations.forEach(station => {
@@ -134,7 +194,7 @@
                 permanent: true,
                 className: "my-label",
                 offset: [0, 0]
-            }).addTo(map)
+            }).addTo(markersLayer);
 
 
             // p = new L.Popup({
@@ -146,6 +206,25 @@
             // marker.bindPopup(p);
 
         });
+
+
+        var list = new L.Control.ListMarkers({
+            layer: markersLayer,
+            itemIcon: null
+        });
+
+
+        list.on('item-mouseover', function (e) {
+            e.layer.setIcon(L.icon({
+                iconUrl: '../images/select-marker.png'
+            }))
+        }).on('item-mouseout', function (e) {
+            e.layer.setIcon(L.icon({
+                iconUrl: L.Icon.Default.imagePath + '/marker-icon.png'
+            }))
+        });
+
+        map.addControl(list);
     </script>
 </body>
 
