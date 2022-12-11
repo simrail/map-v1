@@ -58,8 +58,60 @@
                 name: 'Mysłowice',
                 x: 50.23790508562325,
                 y: 19.141623443140155
-            }
+            },
+            {
+                name: 'Włoszczowa Północ',
+                x: 50.85636043203617,
+                y: 19.946270230041435
+            },
+            {
+                name: 'Żelisławice',
+                x: 50.80337865175368,
+                y: 19.858169169133415
+            },
+            {
+                name: 'Opoczno Południe',
+                x: 51.35911520671831,
+                y: 20.231589122331414,
+                ai: true,
+            },
+            {
+                name: 'Pilichowice',
+                x: 51.25111190155769,
+                y: 20.119311761248742,
+            },
+            {
+                name: 'Olszamowice',
+                x: 51.09564024297421,
+                y: 20.068644547599625,
+                type: 'digital'
+            },
+            {
+                name: 'Dąbrowa Górnicza',
+                x: 50.330193771005916,
+                y: 19.185407083980802,
+            },
+            {
+                name: 'Góra Włodowska',
+                x: 50.58487189276535,
+                y: 19.46368954563215,
+                type: 'digital'
+
+            },
+            {
+                name: 'Włoszczowa Północ',
+                x: 50.8563928700141,
+                y: 19.946100644374447,
+            },
+            {
+                name: 'Zawiercie',
+                x: 50.481106770727386,
+                y: 19.42341238900361,
+            },
+
+
         ]
+
 
         var map = L.map('map', {
             fullscreenControl: true,
@@ -76,9 +128,9 @@
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 500
+                radius: 500,
 
-            }).bindTooltip(station.name, {
+            }).bindTooltip((station.ai ? '[AI] ' : '') + station.name, {
                 permanent: true,
                 className: "my-label",
                 offset: [0, 0]
